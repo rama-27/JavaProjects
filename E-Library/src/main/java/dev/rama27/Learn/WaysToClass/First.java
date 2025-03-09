@@ -1,4 +1,4 @@
-package dev.rama27.WaysToClass;
+package dev.rama27.Learn.WaysToClass;
 
 // using new keyword
 public class First {

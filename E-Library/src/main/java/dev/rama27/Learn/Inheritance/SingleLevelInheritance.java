@@ -1,4 +1,4 @@
-package dev.rama27.Inheritance;
+package dev.rama27.Learn.Inheritance;
 
 
 class Parent{

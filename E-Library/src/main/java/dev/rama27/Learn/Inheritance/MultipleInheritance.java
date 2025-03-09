@@ -1,4 +1,4 @@
-package dev.rama27.Inheritance;
+package dev.rama27.Learn.Inheritance;
 
 interface A{
      default void display(){
