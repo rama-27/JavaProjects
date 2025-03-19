@@ -1,0 +1,38 @@
+
+-> if else
+-> switch
+-> for loop
+-> while
+-> do while
+ continue and break
+
+Object creation : 5 types -> new keyword
+Try diff Return Types for methods
+Constructors, types of Constructor
+-> No args Constructor/ Default Constructor
+-> Parameterized Constructor
+this keyword
+Inheritance
+-> Single lvl - pc childclass
+-> multi lvl - pc -> cc -> cc
+-> multiple - cc -> 2pc => not possible with classes.
+-> hirarechical - 1pc -> multi cc
+-> hybrid - combination of all.
+
+Polymorphism
+-> Method overloading
+-> Method overriding
+-> super keyword
+
+Access specifiers and encapsulation
+And abstraction
+
+Abstraction and interface
+Strings types memory areas
+string inbuilt methods
+
+12-03-2025
+String builder and String buffer
+Arrays 1D
+
+i

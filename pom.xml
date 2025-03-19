@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>E-Library</module>
+        <module>JavaBasics</module>
         <module>sample-http-server</module>
         <module>simple-finance-tracker</module>
     </modules>
