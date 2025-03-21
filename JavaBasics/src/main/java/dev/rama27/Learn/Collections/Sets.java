@@ -59,5 +59,11 @@ public class Sets {
     public static void treeSetEx(){
 
         Set<Integer> set=new TreeSet<>();
+        set.addAll(List.of(1,2,3,4));
+
+        for (Integer i: set
+             ) {
+            System.out.print(i);
+        }
     }
 }
