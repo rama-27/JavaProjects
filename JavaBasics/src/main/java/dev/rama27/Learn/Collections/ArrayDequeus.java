@@ -16,7 +16,7 @@ public class ArrayDequeus {
         stack.push(30);
         System.out.println("ele in stack  " + stack);
 
-        System.out.println("Top element (peek): " + stack.peek());
+        System.out.println(" ele on top " + stack.peek());
 
         System.out.println("remove top ele " + stack.pop());
         System.out.println(" remove  top ele" + stack.pop());
@@ -33,13 +33,14 @@ public class ArrayDequeus {
         queue.add(40);
         queue.offerLast(20);
         queue.offerLast(30);
-        System.out.println("Queue after adding 10, 20, 30: " + queue);
+        System.out.println("Queue ele " + queue);
 
         System.out.println("Front element (peek): " + queue.peekFirst());
+        System.out.println("back element "+queue.peekLast());
 
-        System.out.println("Removed: " + queue.pollFirst());
-        System.out.println("Removed: " + queue.pollFirst());
-        System.out.println("Queue after removing twice: " + queue);
+        System.out.println("Removing front element " + queue.pollFirst());
+        System.out.println("Removing back element " + queue.pollLast());
+        System.out.println("Queue now  " + queue);
 
         System.out.println("Is queue empty? " + queue.isEmpty());
 
