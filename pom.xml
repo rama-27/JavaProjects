@@ -13,6 +13,7 @@
         <module>sample-http-server</module>
         <module>simple-finance-tracker</module>
         <module>file-sync-tool</module>
+        <module>email-filter-app</module>
     </modules>
 
     <properties>
