@@ -31,8 +31,13 @@ Abstraction and interface
 Strings types memory areas
 string inbuilt methods
 
-12-03-2025
 String builder and String buffer
 Arrays 1D
 
-i
+→ Hibernate Eager/Lazy Loading with practical implementation.
+
+→ Create POJO Classes and implement validators.
+
+→ Make use of Generator Classes
+
+→ Complete all Mappings (one to one, one to many, many to one, many to many).

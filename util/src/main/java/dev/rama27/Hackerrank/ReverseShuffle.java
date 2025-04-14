@@ -1,4 +1,4 @@
-package dev.rama27.DSA.Hackerrank;
+package dev.rama27.Hackerrank;
 
 import java.util.HashMap;
 
