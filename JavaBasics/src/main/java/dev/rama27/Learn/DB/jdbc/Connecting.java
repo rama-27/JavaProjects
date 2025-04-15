@@ -10,9 +10,6 @@ public class Connecting {
     public static void main(String[] args) throws ClassNotFoundException {
         try {
             // 1. Load driver and properties
-//            FileInputStream input = new FileInputStream("JavaBasics/src/main/java/resources/application.properties");
-//            Properties properties = new Properties();
-//            properties.load(input);
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/test";
             String un = "root";
@@ -25,12 +22,12 @@ public class Connecting {
             // 3. Create statement
             Statement stmt = con.createStatement();
 
-            // Perform CRUD operations
             create(stmt, "sam", 200);
             create(stmt, "jon", 201);
             read(stmt);
-            update(stmt, "jon", 202);
-            deleteByName(stmt, "sam");
+            readByName(stmt,"sam");
+//            update(stmt, "jon", 202);
+//            deleteByName(stmt, "sam");
 
             // 5. Close resources
             stmt.close();
@@ -49,6 +46,14 @@ public class Connecting {
 
     public static void read(Statement stmt) throws SQLException {
         String query = "SELECT * FROM student";
+        ResultSet rs = stmt.executeQuery(query);
+        System.out.println("Student Records:");
+        while (rs.next()) {
+            System.out.println("Name: " + rs.getString(1) + ", Roll No: " + rs.getInt(2));
+        }
+    }
+    public static void readByName(Statement stmt, String name) throws SQLException {
+        String query = "SELECT * FROM student where name='"+name+"'";
         ResultSet rs = stmt.executeQuery(query);
         System.out.println("Student Records:");
         while (rs.next()) {

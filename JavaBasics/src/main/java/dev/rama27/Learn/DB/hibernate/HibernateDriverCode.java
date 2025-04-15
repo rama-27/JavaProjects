@@ -32,9 +32,9 @@ public class HibernateDriverCode {
     }
 
     public void inUse(){
-        sessionFactory.inTransaction(tx -> {
-            tx.persist(new Event("our very first event", LocalDateTime.now()));
-            tx.persist(new Event("a follow up event", LocalDateTime.now().plusMinutes(4)));
+        sessionFactory.inTransaction(session -> {
+            session.persist(new Event("our very first event", LocalDateTime.now()));
+            session.persist(new Event("a follow up event", LocalDateTime.now().plusMinutes(4)));
         });
 
         sessionFactory.inTransaction(session -> {
