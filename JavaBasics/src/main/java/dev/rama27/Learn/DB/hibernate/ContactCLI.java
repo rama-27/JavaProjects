@@ -120,7 +120,6 @@ public class ContactCLI {
         if (!phone.isEmpty()) {
             contact.setPhone(phone);
         }
-        
         contactDAO.update(contact);
         System.out.println("Contact updated successfully!");
     }
@@ -161,7 +160,7 @@ public class ContactCLI {
             }
         }
     }
-    
+
     private Long getLongInput(String prompt) {
         while (true) {
             try {
@@ -172,4 +171,5 @@ public class ContactCLI {
             }
         }
     }
+
 }

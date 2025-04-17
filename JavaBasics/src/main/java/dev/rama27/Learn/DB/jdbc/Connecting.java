@@ -24,10 +24,14 @@ public class Connecting {
 
             create(stmt, "sam", 200);
             create(stmt, "jon", 201);
+            create(stmt, "ram", 202);
+            create(stmt, "raj", 203);
             read(stmt);
             readByName(stmt,"sam");
-//            update(stmt, "jon", 202);
-//            deleteByName(stmt, "sam");
+            update(stmt, "raj", 207);
+            deleteByName(stmt, "ram");
+            deleteAll(stmt);
+
 
             // 5. Close resources
             stmt.close();
@@ -47,10 +51,12 @@ public class Connecting {
     public static void read(Statement stmt) throws SQLException {
         String query = "SELECT * FROM student";
         ResultSet rs = stmt.executeQuery(query);
+        System.out.println("======================================");
         System.out.println("Student Records:");
         while (rs.next()) {
             System.out.println("Name: " + rs.getString(1) + ", Roll No: " + rs.getInt(2));
         }
+        System.out.println("======================================");
     }
     public static void readByName(Statement stmt, String name) throws SQLException {
         String query = "SELECT * FROM student where name='"+name+"'";
@@ -71,5 +77,8 @@ public class Connecting {
         String query = "DELETE FROM student WHERE name = '" + name + "'";
         stmt.executeUpdate(query);
         System.out.println("Record deleted for: " + name);
+    }
+    public static void deleteAll(Statement stmt) throws SQLException{
+        stmt.execute("TRUNCATE TABLE student");
     }
 }
