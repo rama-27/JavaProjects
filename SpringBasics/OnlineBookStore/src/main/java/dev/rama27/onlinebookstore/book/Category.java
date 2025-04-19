@@ -1,8 +1,7 @@
-package dev.rama27.onlinebookstore.entity;
+package dev.rama27.onlinebookstore.book;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Category {
