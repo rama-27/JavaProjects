@@ -4,43 +4,63 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class BookService {
+public class BookService implements BookServiceImpl{
     BookRepo repo;
     @Autowired
     public BookService(BookRepo repo) {
         this.repo = repo;
     }
-    public void addBook(Book book)   {
-        Book existingBook = repo.findById(book.getId()).orElse(null);
-        if(existingBook==null){
-            repo.save(book);
+
+    @Override
+    public void addBook(Book book) throws BookAlreadyExist {
+        if (repo.existsById(book.getId())) {
+            throw new BookAlreadyExist("Book with id " + book.getId() + " already exists");
         }
-        else{
-            try {
-                throw new BookAlreadyExist("Book with ID " + book.getId() + " already exists.");
-            } catch (BookAlreadyExist e) {
-                throw new RuntimeException(e);
-            }
-        }
+        repo.save(book);
     }
 
-    public Book getBook(long id) {
-        Book book = repo.findById(id).orElse(null);
-        if (book != null) {
-            return book;
-        } else {
-            return null;
+    @Override
+    public Optional<Book> getBook(long id) {
+        if (repo.existsById(id)) {
+            return repo.findById(id);
         }
+        return Optional.empty();
     }
 
+    @Override
     public List<Book> getAllBooks() {
         return repo.findAll();
     }
 
-    public List<Book> getBooksByAuthor(String author) {
-        return repo.findAllByAuthor(author);
+    @Override
+    public Optional<Object> getBooksByAuthor(String author) {
+        return Optional.ofNullable(repo.findAllByAuthor(author));
     }
-    
+
+    @Override
+    public List<Book> getBooksByCategory(long categoryId) {
+        if (repo.existsById(categoryId)) {
+            return repo.findByCategoryId(categoryId);
+        }
+        return List.of();
+    }
+
+    @Override
+    public List<Book> getBooksByTitle(String title) {
+        if (repo.existsByTitle(title)) {
+            return repo.findByTitleContaining(title);
+        }
+        return List.of();
+    }
+
+    @Override
+    public List<Book> getBooksByAuthorAndCategory(String author, long categoryId) {
+        if (repo.existsById(categoryId)) {
+            return repo.findByAuthorAndCategoryId(author, categoryId);
+        }
+        return List.of();
+    }
 }

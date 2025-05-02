@@ -10,14 +10,14 @@ import java.util.Date;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(name="title" ,nullable = false)
     private String title;
     private String author;
     @Column(length = 2000)
@@ -29,7 +29,7 @@ public class Book {
     private Date publicationDate;
     @ManyToOne
     private Category category;
-    
+
 }
 
 
