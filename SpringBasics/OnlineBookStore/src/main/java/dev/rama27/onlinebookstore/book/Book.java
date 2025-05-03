@@ -27,7 +27,8 @@ public class Book {
     @Column(unique = true)
     private String isbn;
     private Date publicationDate;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Add CascadeType.PERSIST/MERGE
+    @JoinColumn(name = "category_id")
     private Category category;
 
 }
