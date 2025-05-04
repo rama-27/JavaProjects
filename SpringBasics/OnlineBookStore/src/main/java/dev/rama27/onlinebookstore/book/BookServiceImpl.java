@@ -8,9 +8,11 @@ public interface BookServiceImpl {
      Optional<Book> getBook(long id) ;
      List<Book> getAllBooks() ;
      Optional<Object> getBooksByAuthor(String author) ;
-     List<Book> getBooksByCategory(long categoryId) ;
+//     List<Book> getBooksByCategory(long categoryId) ;
      List<Book> getBooksByTitle(String title) ;
-     List<Book> getBooksByAuthorAndCategory(String author, long categoryId) ;
-        
+//     List<Book> getBooksByAuthorAndCategory(String author, long categoryId) ;
+     List<Book> getBooksByAuthorAndGenre(String author, Genre genre);
+
+     List<Book> getBooksByGenre(Genre genre);
         
 }

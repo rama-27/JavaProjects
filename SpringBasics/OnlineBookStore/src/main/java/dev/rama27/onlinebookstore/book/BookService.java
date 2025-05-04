@@ -40,13 +40,13 @@ public class BookService implements BookServiceImpl{
         return Optional.ofNullable(repo.findAllByAuthor(author));
     }
 
-    @Override
-    public List<Book> getBooksByCategory(long categoryId) {
-        if (repo.existsById(categoryId)) {
-            return repo.findByCategoryId(categoryId);
-        }
-        return List.of();
-    }
+//    @Override
+//    public List<Book> getBooksByCategory(long categoryId) {
+//        if (repo.existsById(categoryId)) {
+//            return repo.findByCategoryId(categoryId);
+//        }
+//        return List.of();
+//    }
 
     @Override
     public List<Book> getBooksByTitle(String title) {
@@ -57,10 +57,22 @@ public class BookService implements BookServiceImpl{
     }
 
     @Override
-    public List<Book> getBooksByAuthorAndCategory(String author, long categoryId) {
-        if (repo.existsById(categoryId)) {
-            return repo.findByAuthorAndCategoryId(author, categoryId);
-        }
-        return List.of();
+    public List<Book> getBooksByAuthorAndGenre(String author, Genre genre) {
+        List<Book> res=repo.findByAuthorAndGenre(author,genre);
+        return res;
+    }
+
+//    @Override
+//    public List<Book> getBooksByAuthorAndCategory(String author, long categoryId) {
+//        if (repo.existsById(categoryId)) {
+//            return repo.findByAuthorAndCategoryId(author, categoryId);
+//        }
+//        return List.of();
+//    }
+
+    @Override
+    public List<Book> getBooksByGenre(Genre genre) {
+        List<Book> res=repo.findByGenre(genre);
+        return res;
     }
 }
