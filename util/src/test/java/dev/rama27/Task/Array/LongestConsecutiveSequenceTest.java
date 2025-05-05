@@ -9,9 +9,9 @@ class LongestConsecutiveSequenceTest {
     @Test
     void test(){
         int[] arr={1,3,4,6,7,8,9,11,12};
-        int[] res=l.longestConsecutiveSequence(arr);
-        int[] exp={6,7,8,9};
-        assertArrayEquals(res,exp);
+        int res=l.longestConsecutiveSequence(arr);
+        int exp=4;
+        assertEquals(exp,res);
     }
 
 }
