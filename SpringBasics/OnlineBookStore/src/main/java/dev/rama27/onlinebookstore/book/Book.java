@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -14,11 +15,12 @@ import java.util.Date;
 @NoArgsConstructor
 public class Book {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy=GenerationType.UUID)
+    private UUID id;
 
     @Column(name="title" ,nullable = false)
     private String title;
+    @Column(length = 500)
     private String author;
     @Column(length = 2000)
     private String description;
@@ -27,11 +29,9 @@ public class Book {
     @Column(unique = true)
     private String isbn;
     private Date publicationDate;
-//    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // Add CascadeType.PERSIST/MERGE
-//    @JoinColumn(name = "category_id")
-//    private Category category;
+    private String publisher;
 
-    private Genre genre;
+    private String genre;
 
 }
 

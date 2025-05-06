@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class BookService implements BookServiceImpl{
@@ -16,14 +17,27 @@ public class BookService implements BookServiceImpl{
 
     @Override
     public void addBook(Book book) throws BookAlreadyExist {
-        if (repo.existsById(book.getId())) {
+        if (repo.existsByIsbn(book.getIsbn())) {
             throw new BookAlreadyExist("Book with id " + book.getId() + " already exists");
         }
         repo.save(book);
     }
 
     @Override
-    public Optional<Book> getBook(long id) {
+    public void addBooks(List<Book> books) throws BookAlreadyExist {
+        for(Book book :books){
+            addBook(book);
+        }
+
+    }
+
+    @Override
+    public int noOfBooks() {
+        return (int)repo.count();
+    }
+
+    @Override
+    public Optional<Book> getBook(UUID id) {
         if (repo.existsById(id)) {
             return repo.findById(id);
         }
@@ -50,14 +64,11 @@ public class BookService implements BookServiceImpl{
 
     @Override
     public List<Book> getBooksByTitle(String title) {
-        if (repo.existsByTitle(title)) {
             return repo.findByTitleContaining(title);
-        }
-        return List.of();
     }
 
     @Override
-    public List<Book> getBooksByAuthorAndGenre(String author, Genre genre) {
+    public List<Book> getBooksByAuthorAndGenre(String author, String genre) {
         List<Book> res=repo.findByAuthorAndGenre(author,genre);
         return res;
     }
@@ -71,8 +82,15 @@ public class BookService implements BookServiceImpl{
 //    }
 
     @Override
-    public List<Book> getBooksByGenre(Genre genre) {
+    public List<Book> getBooksByGenre(String genre) {
         List<Book> res=repo.findByGenre(genre);
         return res;
+    }
+
+
+    @Override
+    public void deleteAll() {
+        repo.deleteAll();
+
     }
 }

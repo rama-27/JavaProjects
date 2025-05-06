@@ -1,10 +1,7 @@
 package dev.rama27.onlinebookstore.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,11 +18,29 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
+    @GetMapping("/books/{bookname}")
+    public Book getBookByName(@PathVariable String bookname){
+        List<Book> books=bookService.getBooksByTitle(bookname);
+        return books.get(0);
+    }
+    @GetMapping("/books/count")
+    public int getCountBooks(){
+        return bookService.noOfBooks();
+    }
     @PostMapping("/books/add")
     public void addBook(@RequestBody Book book) throws BookAlreadyExist {
         bookService.addBook(book);
     }
 
+    @PostMapping("/books/adds")
+    public void addBooks(@RequestBody List<Book> books) throws BookAlreadyExist{
+        bookService.addBooks(books);
+    }
+
+    @DeleteMapping("/books")
+    public void deleteAll(){
+        bookService.deleteAll();
+    }
     
 
 
