@@ -1,6 +1,9 @@
 package dev.rama27.onlinebookstore.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,8 +48,8 @@ public class BookService implements BookServiceImpl{
     }
 
     @Override
-    public List<Book> getAllBooks() {
-        return repo.findAll();
+    public Page<Book> getAllBooks(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     @Override
@@ -54,17 +57,16 @@ public class BookService implements BookServiceImpl{
         return Optional.ofNullable(repo.findAllByAuthor(author));
     }
 
-//    @Override
-//    public List<Book> getBooksByCategory(long categoryId) {
-//        if (repo.existsById(categoryId)) {
-//            return repo.findByCategoryId(categoryId);
-//        }
-//        return List.of();
-//    }
 
     @Override
     public List<Book> getBooksByTitle(String title) {
             return repo.findByTitleContaining(title);
+    }
+
+    @Override
+    public Page<Book> getBooksByTitleContaining(String title,Pageable pageable) {
+        Page<Book> Books=repo.findBooksByTitleContainingIgnoreCase(title,  pageable);
+        return Books;
     }
 
     @Override
@@ -73,13 +75,6 @@ public class BookService implements BookServiceImpl{
         return res;
     }
 
-//    @Override
-//    public List<Book> getBooksByAuthorAndCategory(String author, long categoryId) {
-//        if (repo.existsById(categoryId)) {
-//            return repo.findByAuthorAndCategoryId(author, categoryId);
-//        }
-//        return List.of();
-//    }
 
     @Override
     public List<Book> getBooksByGenre(String genre) {

@@ -1,5 +1,7 @@
 package dev.rama27.onlinebookstore.book;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -10,6 +12,8 @@ public interface BookRepo extends JpaRepository<Book, UUID> {
     List<Book> findByAuthorContainingIgnoreCase(String author);
     List<Book> findByTitleContainingIgnoreCase(String title);
     Book findByIsbn(String isbn);
+
+    Page<Book> findBooksByTitleContainingIgnoreCase(String title, Pageable pageable);
     List<Book> findByTitleContaining(String title);
     List<Book> findByAuthorContaining(String author);
     List<Book> findAllByAuthor(String author);

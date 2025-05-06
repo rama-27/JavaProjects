@@ -1,6 +1,9 @@
 package dev.rama27.onlinebookstore.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +17,9 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    public ResponseEntity<Page<Book>> getAllBooks(Pageable pageable){
+        Page<Book> books= bookService.getAllBooks(pageable);
+        return ResponseEntity.ok(books);
     }
 
     @GetMapping("/books/{bookname}")
@@ -23,10 +27,18 @@ public class BookController {
         List<Book> books=bookService.getBooksByTitle(bookname);
         return books.get(0);
     }
+    @GetMapping("/books/{title}/")
+    public Page<Book> getBooksPagination(@PathVariable String title,Pageable pageable ){
+        return bookService.getBooksByTitleContaining(title,pageable);
+    }
+
+
     @GetMapping("/books/count")
     public int getCountBooks(){
         return bookService.noOfBooks();
     }
+
+
     @PostMapping("/books/add")
     public void addBook(@RequestBody Book book) throws BookAlreadyExist {
         bookService.addBook(book);
