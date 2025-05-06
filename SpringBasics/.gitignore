@@ -1,3 +1,5 @@
+*/db/*.db
+*/SpringBasics/OnlineBookStore/src/main/resources/*.csv
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
