@@ -60,12 +60,11 @@ public class BookDataLoader implements ApplicationRunner {
         try (Reader reader = new InputStreamReader(resource.getInputStream());
              CSVReader csvReader = new CSVReaderBuilder(reader)
                      .withCSVParser(new CSVParserBuilder()
-                             .withSeparator(',')
-                             .withQuoteChar('"')
-                             .withEscapeChar('\\')
-                             .withStrictQuotes(false)
-                             .withIgnoreLeadingWhiteSpace(true)
-                             .withIgnoreQuotations(false)
+                             .withSeparator(';')             // <<< CHANGED: Use semicolon
+                             .withQuoteChar('"')             // Standard, usually correct.
+                             .withEscapeChar('\\')           // Keep this if your problematic titles have \\\" sequences.
+                             .withStrictQuotes(false)        // Correct, as your fields are not always quoted.
+                             .withIgnoreLeadingWhiteSpace(true) // Good for cleaning up spaces.
                              .build())
                      .build()) {
 
@@ -135,7 +134,6 @@ public class BookDataLoader implements ApplicationRunner {
                         book.setPublisher(truncateIfNeeded(line[publisherIndex], 255));
                     }
 
-                    // Prefer large image if available, fall back to medium or small
                     if (imageUrlLIndex >= 0 && imageUrlLIndex < line.length && !line[imageUrlLIndex].isEmpty()) {
                         book.setImageUrl(truncateIfNeeded(line[imageUrlLIndex], 255));
                     } else if (imageUrlMIndex >= 0 && imageUrlMIndex < line.length && !line[imageUrlMIndex].isEmpty()) {
@@ -152,7 +150,6 @@ public class BookDataLoader implements ApplicationRunner {
                         book.setDescription(truncateIfNeeded(line[descriptionIndex], 2000));
                     }
 
-                    // Generate a random price between $5.99 and $29.99
                     BigDecimal price = new BigDecimal(5.99 + (random.nextDouble() * 24.00));
                     // Round to 2 decimal places
                     price = price.setScale(2, BigDecimal.ROUND_HALF_UP);

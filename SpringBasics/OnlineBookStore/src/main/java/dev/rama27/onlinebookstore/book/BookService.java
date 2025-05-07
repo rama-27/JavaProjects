@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +20,12 @@ public class BookService implements BookServiceImpl{
     }
 
     @Override
-    public void addBook(Book book) throws BookAlreadyExist {
+    public Book addBook(Book book) throws BookAlreadyExist {
         if (repo.existsByIsbn(book.getIsbn())) {
             throw new BookAlreadyExist("Book with id " + book.getId() + " already exists");
         }
-        repo.save(book);
+        Book books=repo.save(book);
+        return books;
     }
 
     @Override
@@ -53,14 +55,14 @@ public class BookService implements BookServiceImpl{
     }
 
     @Override
-    public Optional<Object> getBooksByAuthor(String author) {
-        return Optional.ofNullable(repo.findAllByAuthor(author));
+    public Page<Book> getBooksByAuthor(String author,Pageable pageable) {
+        return null;
     }
 
 
     @Override
-    public List<Book> getBooksByTitle(String title) {
-            return repo.findByTitleContaining(title);
+    public Page<Book> getBooksByTitle(String title,Pageable pageable) {
+            return repo.findByTitleContaining(title,pageable);
     }
 
     @Override
@@ -70,15 +72,15 @@ public class BookService implements BookServiceImpl{
     }
 
     @Override
-    public List<Book> getBooksByAuthorAndGenre(String author, String genre) {
-        List<Book> res=repo.findByAuthorAndGenre(author,genre);
+    public Page<Book> getBooksByAuthorAndGenre(String author, String genre,Pageable pageable) {
+        Page<Book> res=repo.findByAuthorContainingIgnoreCaseAndGenreContainingIgnoreCase(author,genre,pageable);
         return res;
     }
 
 
     @Override
-    public List<Book> getBooksByGenre(String genre) {
-        List<Book> res=repo.findByGenre(genre);
+    public Page<Book> getBooksByGenre(String genre,Pageable pageable) {
+        Page<Book> res=repo.findByGenre(genre,pageable);
         return res;
     }
 

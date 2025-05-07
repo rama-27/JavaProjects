@@ -8,18 +8,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface BookServiceImpl {
-     void addBook(Book book) throws BookAlreadyExist;
+     Book addBook(Book book) throws BookAlreadyExist;
 
      void addBooks(List<Book> books)  throws BookAlreadyExist;
      int noOfBooks();
      Optional<Book> getBook(UUID id) ;
      Page<Book> getAllBooks(Pageable pageable) ;
-     Optional<Object> getBooksByAuthor(String author) ;
-     List<Book> getBooksByTitle(String title) ;
+     Page<Book> getBooksByAuthor(String author,Pageable pageable) ;
+     Page<Book> getBooksByTitle(String title,Pageable pageable) ;
      Page<Book> getBooksByTitleContaining(String title, Pageable pageable);
-     List<Book> getBooksByAuthorAndGenre(String author, String genre);
+     Page<Book> getBooksByAuthorAndGenre(String author, String genre, Pageable pageable);
 
-     List<Book> getBooksByGenre(String genre);
+     Page<Book> getBooksByGenre(String genre, Pageable pageable);
 
      void deleteAll();
         
